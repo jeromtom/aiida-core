@@ -468,7 +468,15 @@ def graph_generate(
         include_process_inputs=process_in,
         highlight_classes=highlight_classes,
     )
-    output_file_name = graph.graphviz.render(
+    echo.echo_info('Output filename is by default based on the node PK. Would you like to change it?(Y/N)')
+    if input()== 'Y':
+        echo.echo_info('Enter the desired filename')
+        filename=input()
+        output_file_name = graph.graphviz.render(
+        filename, format=output_format, view=show, cleanup=True
+    )
+    elif input()== 'N':
+        output_file_name = graph.graphviz.render(
         filename=f'{root_node.pk}.{engine}', format=output_format, view=show, cleanup=True
     )
 
